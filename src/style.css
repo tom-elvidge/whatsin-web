@@ -14,3 +14,31 @@ body {
   color: black;
   background-color: white;
 }
+
+.search-div {
+  display: flex;
+  /* Layout the div's children horizontally on a single row */
+  flex-direction: row;
+  flex-wrap: nowrap;
+  /* Center the div vertically and horizontally */
+  justify-content: center;
+  align-items: center;
+}
+
+.search-text {
+  padding: 1vw;
+  font-family: "MontserratBold";
+  font-size: 4vw;
+}
+
+.search-text-input {
+  /* Input text color */
+  color: grey;
+  /* Input text as a line */
+  background: transparent;
+  border: none;
+  border-bottom: 0.3vw solid black;
+  /* Input text is the same height as the header text */
+  padding-bottom: 0.3vw;
+  /* Input text box changes width depending on the contents */
+}
