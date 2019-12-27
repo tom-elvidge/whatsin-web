@@ -15,6 +15,12 @@ body {
   background-color: white;
 }
 
+.root-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .search-div {
   display: flex;
   /* Layout the div's children horizontally on a single row */
@@ -31,14 +37,28 @@ body {
   font-size: 4vw;
 }
 
-.search-text-input {
-  /* Input text color */
-  color: grey;
-  /* Input text as a line */
-  background: transparent;
-  border: none;
-  border-bottom: 0.3vw solid black;
-  /* Input text is the same height as the header text */
-  padding-bottom: 0.3vw;
-  /* Input text box changes width depending on the contents */
+.ingredient-item-div {
+  background-color: #f4f4f4;
+  margin: 0.3vw;
+  padding: 1vw;
+  font-size: 1.5vw;
+  border-radius: 1.5vw;
+  height: 1.5vw;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.results-div {
+  background-color: white;
+  color: #696969;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+  margin-left: 6vw;
+  margin-right: 6vw;
 }
