@@ -4,7 +4,7 @@ import "./style.css";
 function App() {
   return (
     <div>
-      <h1>create-react-app</h1>
+      <h1>What's in?</h1>
     </div>
   );
 }
