@@ -27,10 +27,13 @@ class App extends Component {
   /**
    * Called when there is a key press in the text box.
    */
-  handleKeyPress = event => {
+  handleKeyPress = async event => {
     if (event.key === "Enter") {
-      const ingredientResults = ["hello", "world", this.state.searchText];
+      const response = await fetch('https://5ab0bedng2.execute-api.eu-west-2.amazonaws.com/test/recipes/'+this.state.searchText);
+      const recipe = await response.json(); //extract JSON from the http response
+
       /* Create IngredientItem components for each ingredient */
+      var ingredientResults = recipe.ingredients
       const ingredientItems = ingredientResults.map(ingredient => (
         <IngredientItem text={ingredient} />
       ));
