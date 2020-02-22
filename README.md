@@ -1,3 +1,6 @@
+When testing locally run Chrome with CORS disabled:
+'google-chrome --disable-web-security --user-data-dir="../tempudata"'
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
