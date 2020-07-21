@@ -81,75 +81,39 @@ class App extends Component {
    * Called when Enter is pressed in the search box. Search for the recipe.
    */
   async search() {
-    // Function to check a scraper job.
-    const isScraperComplete = async jobId => {
-      const resp = await axios.get('https://5ab0bedng2.execute-api.eu-west-2.amazonaws.com/test/scrapers/'+jobId);
-      if (resp.status === 200 && resp.data.status === "COMPLETE") {
-        return true;
-      } else if (resp.status === 404) {
-        // Return true otherwise will be stuck in a loop.
-        console.log("Could not find scraper job.")
-        return true;
-      } else {
-        return false;
-      }
-    }
-
     // Display loading animation and hide any existing results.
     this.setState({loadingResults: true, showResults: false});
 
     // Get recipe with name searchText.
     const axios = require("axios");
-    var recipe;
+    var resp;
     // If failed gets set to true then something went wrong, handle it in the user interface.
     var failed = false;
 
     try {
-      // Attempt to get recipe incase it already exists.
-      const getRecipeResp = await axios.get('https://5ab0bedng2.execute-api.eu-west-2.amazonaws.com/test/recipes/'+this.state.searchText);
-      recipe = getRecipeResp.data;
+      // Attempt to get recipe.
+      resp = await axios.get('https://wk0hcgjyi6.execute-api.eu-west-2.amazonaws.com/Prod/whatsin/'+this.state.searchText);
+      // resp = await axios.get('http://127.0.0.1:3000/whatsin/'+this.state.searchText);
+      console.log(resp)
     } catch (error) {
-      // Recipe does not already exist.
-      try {
-        // Create a scraper job.
-        const newScraperResp = await axios.post('https://5ab0bedng2.execute-api.eu-west-2.amazonaws.com/test/scrapers', {recipe_name: this.state.searchText});
-        
-        // Get the new scraper jobs jobId.
-        const jobId = newScraperResp.data.jobId;
-        
-        // Poll the scraper job until completed.
-        var complete = false
-        while (!complete) {
-          complete = isScraperComplete(jobId)
-        }
-        
-        // After the scraper job has completed, create a recipe from the results.
-        try {
-          await axios.post('https://5ab0bedng2.execute-api.eu-west-2.amazonaws.com/test/recipes', {job_id: jobId});
-        } catch (error) {}
-
-        // Now the recipe has been created, try to do the same original get request for the recipe.
-        const getRecipeResp = await axios.get('https://5ab0bedng2.execute-api.eu-west-2.amazonaws.com/test/recipes/'+this.state.searchText);
-        recipe = getRecipeResp.data
-      } catch (error) {
-        // If creating a scraper job for the recipe still doesn't work then set the failed flag.
-        failed = true
-      }
+      // Log error.
+      failed = true;
     }
 
     // Stop the loading animation.
     this.setState({loadingResults: false});
 
-    // Get the ingredients from the recipe.
-    var ingredientResults;
+    // Get the ingredients from the response.
+    var ingredients;
     if (failed) {
       // If something went wrong getting the recipe then just display an error message.
-      ingredientResults = ['Failed to get recipe']
+      ingredients = ['Failed to get recipe']
     } else {
-      ingredientResults = recipe.ingredients
+      ingredients = resp.data.ingredients
     }
+
     // Create IngredientItem components for each ingredient.
-    const ingredientItems = ingredientResults.map(ingredient => (
+    const ingredientItems = ingredients.map(ingredient => (
       <IngredientItem text={ingredient} />
     ));
 
