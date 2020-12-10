@@ -10,9 +10,15 @@ This is a very simple React application which could be deployed in many places. 
 
 This will use the production backend by default but you can change it to use a local API endpoint if you have set up the backend development environment.
 
+Install requirements.
+
+```bash
+whatsin-web$ npm install
+```
+
 Start the development server.
 
-``` bash
+```bash
 whatsin-web$ npm start
 ```
 
