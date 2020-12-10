@@ -92,8 +92,8 @@ class App extends Component {
 
     try {
       // Attempt to get recipe.
-      resp = await axios.get('https://wk0hcgjyi6.execute-api.eu-west-2.amazonaws.com/Prod/whatsin/'+this.state.searchText);
-      // resp = await axios.get('http://127.0.0.1:3000/whatsin/'+this.state.searchText);
+      // resp = await axios.get('https://wk0hcgjyi6.execute-api.eu-west-2.amazonaws.com/Prod/whatsin/'+this.state.searchText);
+      resp = await axios.get('http://127.0.0.1:3000/whatsin/'+this.state.searchText);
       console.log(resp)
     } catch (error) {
       // Log error.
