@@ -10,19 +10,10 @@ CORS_HEADERS = {
     'Access-Control-Allow-Origin': '*'
 }
 
-# if os.getenv("AWS_SAM_LOCAL"):
-#     # Use local mysql credentials for local environment.
-#     credentials_filename = 'credentials.csv'
-# else:
-#     # Todo: Use prod credentials.
-#     pass
-# # Get mysql credentials.
-# with open(credentials_filename) as file:
-#     reader = csv.reader(file, delimiter=',')
-#     credentials = next(reader)
-
-# Hardcode local credentials for now.
-credentials = ['db', '3306', 'root', 'password', 'WhatsIn']
+# Load the credentials.
+with open('credentials.csv') as file:
+    reader = csv.reader(file, delimiter=',')
+    credentials = next(reader)
 
 # Connect to mysql instance.
 print('Setting up MySQL connection...')
