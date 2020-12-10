@@ -3,6 +3,10 @@ node_modules
 .pnp
 .pnp.js
 
+# aws
+.aws-sam
+samconfig.toml
+
 # misc
 .DS_Store
 .env.local

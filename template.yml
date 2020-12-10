@@ -1,0 +1,34 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Quickly find out what ingredients are commonly included in a recipe.
+Globals:
+  Function:
+    Timeout: 60
+
+Resources:
+    GetIngredientsFunction:
+        Type: AWS::Serverless::Function
+        Properties:
+            FunctionName: GetIngredientsFunction
+            CodeUri: api/GetIngredientsFunction/
+            Handler: lambda_function.lambda_handler
+            Runtime: python3.7
+            Events:
+                GetIngredientsEvent:
+                    Type: Api
+                    Properties:
+                        Path: /whatsin/{recipe_name}
+                        Method: get
+
+Outputs:
+    IngredientsAPI:
+        Description: 'API Gateway endpoint URL for GetIngredientsFunction.'
+        Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/whatsin/'
+
+    GetIngredientsFunction:
+        Description: 'GetIngredientsFunction Lambda Function ARN.'
+        Value: !GetAtt GetIngredientsFunction.Arn
+
+    GetIngrRedientsFunctionIamRole:
+        Description: 'Implicit IAM Role created for GetIngredientsFunction.'
+        Value: !GetAtt GetIngredientsFunction.Arn

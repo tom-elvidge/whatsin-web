@@ -35,3 +35,11 @@ mysql> source init.sql;
 mysql> quit
 ```
 
+## Build and start local API
+
+From the project root directory build the backend code and then run the API locally.
+
+```bash
+whatsin$ sam build --use-container
+whatsin$ sam local start-api --docker-network whatsin-be_whatsin
+```
